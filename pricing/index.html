@@ -15,7 +15,7 @@
         body {
             font-family: 'Cairo', sans-serif;
         }
-        /* Updated to Blue Glow */
+        /* Blue Glow Theme */
         .glow-text {
             text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
         }
@@ -27,12 +27,11 @@
             transition: all 0.3s ease;
         }
         .card-gradient-border:hover {
-            /* Blue Gradient */
             background-image: linear-gradient(163deg, #3b82f6 0%, #2563eb 100%);
             box-shadow: 0px 0px 30px 1px rgba(59, 130, 246, 0.3);
         }
         .tab-active {
-            background-color: #3b82f6; /* Blue-500 */
+            background-color: #3b82f6; 
             color: #ffffff;
             border-color: #3b82f6;
             box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
@@ -50,6 +49,7 @@
             border: 1px solid rgba(59, 130, 246, 0.5);
             box-shadow: 0 0 15px rgba(59, 130, 246, 0.2), inset 0 0 10px rgba(59, 130, 246, 0.1);
         }
+        
         /* Glassy 3D Title Style */
         .plan-glass-3d {
             background: linear-gradient(
@@ -96,13 +96,70 @@
             transform: translateY(0);
         }
 
-        /* Image Mask for smooth fade at bottom */
-        .bg-fade-mask {
-            -webkit-mask-image: linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
-            mask-image: linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
+        /* Gradient Background Animation */
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .animated-gradient-bg {
+            background: radial-gradient(circle at 50% 0%, #1e3a8a 0%, #0f172a 40%, #020617 100%);
         }
 
-        /* Custom scrollbar for features list if needed */
+        /* Form Input Styles */
+        .form-input {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+        }
+        /* Custom Select Style to handle arrow */
+        select.form-input {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233b82f6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: left 1rem center; /* Adjusted for RTL */
+            background-size: 1em;
+        }
+        select.form-input option {
+            background-color: #0f172a;
+            color: white;
+        }
+
+        /* Glow Button Effect */
+        .btn-glow-hover {
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .btn-glow-hover::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.8) 0%, transparent 70%);
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.5s ease-out;
+            z-index: -1;
+            border-radius: 50%;
+        }
+        .btn-glow-hover:hover::before {
+            transform: translate(-50%, -50%) scale(1.5);
+        }
+        .btn-glow-hover:hover {
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.2);
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Custom scrollbar */
         .features-list::-webkit-scrollbar {
             width: 4px;
         }
@@ -115,38 +172,25 @@
         }
     </style>
 </head>
-<body class="min-h-screen text-slate-200 selection:bg-blue-500 selection:text-white overflow-x-hidden relative bg-[#0B1120]">
+<body class="min-h-screen text-slate-200 selection:bg-blue-500 selection:text-white overflow-x-hidden relative bg-[#020617]">
 
-    <!-- Global Subtle Background (Base) -->
-    <div class="fixed inset-0 z-0 bg-[#0B1120]"></div>
+    <!-- Clean Gradient Background -->
+    <div class="fixed inset-0 z-0 animated-gradient-bg"></div>
 
-    <!-- Targeted Background Image with Fade Out (Behind Title & Cards) -->
-    <div class="absolute top-0 inset-x-0 h-[1200px] z-0 bg-fade-mask pointer-events-none overflow-hidden">
-        <!-- UGC / Studio Themed Image -->
-        <img 
-            src="studio.JPG" 
-            alt="UGC Studio Background" 
-            class="w-full h-full object-cover opacity-50 mix-blend-luminosity"
-        />
-        <!-- Gradient Overlay - Tinted slightly blue/dark -->
-        <div class="absolute inset-0 bg-gradient-to-b from-[#0B1120]/80 via-[#0B1120]/60 to-[#0B1120]"></div>
-    </div>
-
-    <!-- Top Glow Effect (Blue) -->
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-blue-600/10 blur-[120px] pointer-events-none z-0"></div>
+    <!-- Top Light Glow (Subtle Blue Ambient Light) -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[500px] bg-blue-500/10 blur-[100px] rounded-full pointer-events-none z-0 mix-blend-screen"></div>
 
     <div class="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         
         <!-- Header Section -->
         <div class="text-center mb-12">
             
-            <!-- Logo AdWave (Text Only, No Icon, Blue Glow) -->
+            <!-- Logo AdWave -->
             <div class="mb-10 flex justify-center">
                 <div class="relative group cursor-default">
-                    <!-- Blue glow behind logo -->
-                    <div class="absolute -inset-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full blur-xl opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+                    <div class="absolute -inset-4 bg-blue-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition duration-500"></div>
                     <div class="relative px-8 py-2 rounded-xl leading-none flex items-center justify-center">
-                        <span class="text-5xl font-black tracking-tighter text-white font-sans drop-shadow-lg">
+                        <span class="text-5xl font-black tracking-tighter text-white font-sans drop-shadow-2xl">
                             Ad<span class="text-blue-500">Wave</span>
                         </span>
                     </div>
@@ -157,21 +201,21 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></svg>
                 باقات COD Funnel
             </div>
-            <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl glow-text drop-shadow-2xl">
+            <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl glow-text drop-shadow-lg">
                 اختر الخطة المناسبة
                 <span class="bg-gradient-to-l from-blue-400 to-blue-600 bg-clip-text text-transparent">
                     لنمو مشروعك
                 </span>
             </h1>
-            <p class="mx-auto mt-4 max-w-2xl text-lg text-slate-300 font-light drop-shadow-md">
+            <p class="mx-auto mt-4 max-w-2xl text-lg text-slate-400 font-light">
                 حلول متكاملة لصناعة المحتوى الإعلاني (UGC) تضمن لك أفضل النتائج والمبيعات.
             </p>
         </div>
 
-        <!-- Category Tabs (Blue) -->
+        <!-- Category Tabs -->
         <div class="flex flex-wrap justify-center gap-4 mb-8">
             <button onclick="switchCategory('basic')" id="tab-basic" class="tab-active px-8 py-3 rounded-full border text-base font-bold transition-all duration-300 backdrop-blur-sm">
-                Basic Plan
+                Unboxing Plan
             </button>
             <button onclick="switchCategory('organic')" id="tab-organic" class="tab-inactive px-8 py-3 rounded-full border text-base font-bold transition-all duration-300 backdrop-blur-sm">
                 Organic Plan
@@ -181,21 +225,16 @@
             </button>
         </div>
 
-        <!-- Description Box Container with Smooth Slide Animation -->
+        <!-- Description Box -->
         <div id="category-description-container" class="max-w-4xl mx-auto mb-16 px-4 smooth-transition slide-visible-up">
-            <!-- Updated borders to Blue -->
-            <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#1e293b]/80 via-[#0f172a]/80 to-[#0B1120]/90 p-[1px] shadow-[0_0_30px_-5px_rgba(59,130,246,0.15)] border border-blue-500/10 backdrop-blur-xl">
-                <!-- Inner Content -->
-                <div class="relative rounded-2xl bg-[#0B1120]/40 px-6 py-8 text-center">
-                    
-                    <!-- Decorative Icon/Element Blue -->
+            <div class="relative overflow-hidden rounded-2xl bg-[#0f172a]/50 p-[1px] shadow-[0_0_30px_-10px_rgba(59,130,246,0.1)] border border-blue-500/10 backdrop-blur-md">
+                <div class="relative rounded-2xl bg-[#0B1120]/60 px-6 py-8 text-center">
                     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-[1px] bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"></div>
-                    
                     <h3 id="cat-title" class="text-2xl font-bold text-blue-400 mb-3 glow-text tracking-wide">
-                        <!-- JS injected title -->
+                        <!-- Title injected by JS -->
                     </h3>
-                    <p id="cat-desc" class="text-slate-200 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto drop-shadow-sm">
-                        <!-- JS injected description -->
+                    <p id="cat-desc" class="text-slate-300 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto">
+                        <!-- Description injected by JS -->
                     </p>
                 </div>
             </div>
@@ -203,10 +242,71 @@
 
         <!-- Pricing Cards Grid -->
         <div id="pricing-grid" class="grid gap-8 md:grid-cols-3 items-start min-h-[600px]">
-            <!-- Cards will be injected here by JavaScript -->
+            <!-- Cards injected by JS -->
         </div>
 
-        <p class="mt-12 text-center text-sm text-slate-500">
+        <!-- Order Form Section -->
+        <div id="order-form-section" class="mt-24 max-w-3xl mx-auto px-4 relative smooth-transition slide-hidden-down">
+            <!-- Decorative Glow behind form -->
+            <div class="absolute inset-0 bg-blue-600/5 blur-3xl rounded-full pointer-events-none"></div>
+            
+            <div class="relative overflow-hidden rounded-2xl bg-[#0f172a]/80 p-[1px] shadow-2xl border border-blue-500/20 backdrop-blur-xl">
+                <div class="p-8 md:p-12">
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl font-bold text-white mb-2 glow-text">تأكيد طلبك</h2>
+                        <p class="text-slate-400">أكمل البيانات التالية وسنتواصل معك فوراً</p>
+                    </div>
+
+                    <form class="space-y-6" onsubmit="event.preventDefault(); alert('تم إرسال طلبك بنجاح! سنتواصل معك قريباً.');">
+                        <!-- Vertical Stack Layout -->
+                        <div class="flex flex-col gap-6">
+                            
+                            <div class="space-y-2">
+                                <label class="text-sm font-medium text-blue-300">الاسم الكامل</label>
+                                <input type="text" placeholder="اكتب اسمك هنا" class="w-full px-4 py-3 rounded-lg form-input" required>
+                            </div>
+                            
+                            <div class="space-y-2">
+                                <label class="text-sm font-medium text-blue-300">رقم الواتساب</label>
+                                <!-- Updated: Added text-right and dir=rtl to enforce right alignment -->
+                                <input type="tel" placeholder="0XXXXXXXXX" class="w-full px-4 py-3 rounded-lg form-input text-right" dir="rtl" required>
+                            </div>
+
+                            <div class="space-y-2">
+                                <!-- Changed text-slate-400 to text-blue-300 to match other labels -->
+                                <label class="text-sm font-medium text-blue-300">إختر العرض</label>
+                                <div class="relative">
+                                    <select id="selected-offer-input" class="w-full px-4 py-3 rounded-lg form-input cursor-pointer transition-all duration-300">
+                                        <option value="Unboxing Plan">Unboxing Plan</option>
+                                        <option value="Organic Plan">Organic Plan</option>
+                                        <option value="Professional Plan" selected>Professional Plan</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <!-- Changed text-slate-400 to text-blue-300 to match other labels -->
+                                <label class="text-sm font-medium text-blue-300">إختر الباقة</label>
+                                <div class="relative">
+                                    <select id="selected-plan-input" class="w-full px-4 py-3 rounded-lg form-input cursor-pointer font-bold text-white transition-all duration-300">
+                                        <option value="Tester">Tester</option>
+                                        <option value="Growth" selected>Growth</option>
+                                        <option value="Scale">Scale</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <button type="submit" class="w-full py-4 mt-6 rounded-xl font-bold text-lg text-white bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 transition-all duration-300 btn-glow-hover transform hover:-translate-y-1 border border-blue-400/30">
+                            تأكيد الحجز الآن
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <p class="mt-12 text-center text-sm text-slate-500 pb-8">
              جميع الأسعار بالدينار الجزائري (دج). الدفع يتم بشكل آمن ومضمون.
         </p>
     </div>
@@ -215,18 +315,20 @@
         // Data derived from PDF with estimated DZD prices
         const plansData = {
             basic: {
-                title: "Basic Plan",
+                title: "Unboxing Plan",
                 longDesc: "الخيار الذكي لاختبار منتجاتك بأقل تكلفة. نركز عدساتنا على جمالية المنتج وزوايا الإقناع، مع تعليق صوتي (Voiceover) يأسر المشاهد ويحفزه على الشراء.",
                 plans: [
                     {
-                        name: "Plan 1",
+                        name: "Tester",
                         videos: "2 فيديوهات UGC",
                         price: "12,500",
                         features: [
                             "بحث معمق عن زوايا البيع (Best Angles)",
                             "كتابة السكربت (Sallup Copywriters)",
+                            "مراجعة السكريبت قبل التصوير (Approval)",
                             "مودل يعرض المنتج مع تعليق صوتي (Voiceover)",
                             "مونتاج محفز للمبيعات (Editing that sell)",
+                            "مدة مركزة للنتائج (أقل من دقيقة)",
                             "مقاسات فيديو مخصصة"
                         ],
                         bonuses: [
@@ -235,14 +337,16 @@
                         ]
                     },
                     {
-                        name: "Plan 2",
+                        name: "Growth",
                         videos: "5 فيديوهات UGC",
                         price: "27,500",
                         features: [
                             "بحث معمق عن زوايا البيع (Best Angles)",
                             "كتابة السكربت (Sallup Copywriters)",
+                            "مراجعة السكريبت قبل التصوير (Approval)",
                             "مودل يعرض المنتج مع تعليق صوتي (Voiceover)",
                             "مونتاج محفز للمبيعات (Editing that sell)",
+                            "مدة مركزة للنتائج (أقل من دقيقة)",
                             "مقاسات فيديو مخصصة"
                         ],
                         bonuses: [
@@ -251,14 +355,16 @@
                         ]
                     },
                     {
-                        name: "Plan 3",
+                        name: "Scale",
                         videos: "10 فيديوهات UGC",
                         price: "49,500",
                         features: [
                             "بحث معمق عن زوايا البيع (Best Angles)",
                             "كتابة السكربت (Sallup Copywriters)",
+                            "مراجعة السكريبت قبل التصوير (Approval)",
                             "مودل يعرض المنتج مع تعليق صوتي (Voiceover)",
                             "مونتاج محفز للمبيعات (Editing that sell)",
+                            "مدة مركزة للنتائج (أقل من دقيقة)",
                             "مقاسات فيديو مخصصة"
                         ],
                         bonuses: [
@@ -273,14 +379,16 @@
                 longDesc: "المحتوى الذي ينتشر كالنار في الهشيم! فيديوهات عفوية بمودلز حقيقيين في بيئة منزلية، تبني ثقة فورية مع عملائك وتكسر حاجز 'الإعلان' التقليدي لزيادة المبيعات.",
                 plans: [
                     {
-                        name: "Plan 1",
+                        name: "Tester",
                         videos: "2 فيديوهات UGC",
                         price: "15,000",
                         features: [
                             "بحث معمق عن زوايا البيع",
                             "كتابة السكربت",
+                            "مراجعة السكريبت قبل التصوير (Approval)",
                             "مودل حقيقي من الدولة المستهدفة",
                             "مونتاج محفز للمبيعات",
+                            "مدة مركزة للنتائج (أقل من دقيقة)",
                             "مقاسات فيديو مخصصة"
                         ],
                         bonuses: [
@@ -290,14 +398,16 @@
                         ]
                     },
                     {
-                        name: "Plan 2",
+                        name: "Growth",
                         videos: "5 فيديوهات UGC",
                         price: "35,000",
                         features: [
                             "بحث معمق عن زوايا البيع",
                             "كتابة السكربت",
+                            "مراجعة السكريبت قبل التصوير (Approval)",
                             "مودل حقيقي من الدولة المستهدفة",
                             "مونتاج محفز للمبيعات",
+                            "مدة مركزة للنتائج (أقل من دقيقة)",
                             "مقاسات فيديو مخصصة"
                         ],
                         bonuses: [
@@ -307,14 +417,16 @@
                         ]
                     },
                     {
-                        name: "Plan 3",
+                        name: "Scale",
                         videos: "10 فيديوهات UGC",
                         price: "55,000",
                         features: [
                             "بحث معمق عن زوايا البيع",
                             "كتابة السكربت",
+                            "مراجعة السكريبت قبل التصوير (Approval)",
                             "مودل حقيقي من الدولة المستهدفة",
                             "مونتاج محفز للمبيعات",
+                            "مدة مركزة للنتائج (أقل من دقيقة)",
                             "مقاسات فيديو مخصصة"
                         ],
                         bonuses: [
@@ -331,15 +443,17 @@
                 longDesc: "الهيمنة المطلقة على السوق! إنتاج سينمائي فاخر داخل استوديوهات احترافية. نستخدم أحدث معدات الإضاءة والتصوير لنظهر منتجك كعلامة تجارية عالمية لا تُقاوم. هذا الاستثمار هو تذكرتك لمضاعفة الأرباح.",
                 plans: [
                     {
-                        name: "Plan 1",
+                        name: "Tester",
                         videos: "2 فيديوهات UGC",
                         price: "17,500",
                         features: [
                             "تصوير احترافي بجودة عالية",
                             "مودل حقيقي من الدولة المستهدفة",
                             "كتابة السكربت",
+                            "مراجعة السكريبت قبل التصوير (Approval)",
                             "بحث معمق عن زوايا البيع",
                             "مونتاج محفز للمبيعات",
+                            "مدة مركزة للنتائج (أقل من دقيقة)",
                             "مقاسات فيديو مخصصة"
                         ],
                         bonuses: [
@@ -349,7 +463,7 @@
                         ]
                     },
                     {
-                        name: "Plan 2",
+                        name: "Growth",
                         videos: "5 فيديوهات UGC",
                         price: "42,500",
                         isBestSeller: true,
@@ -357,8 +471,10 @@
                             "تصوير احترافي بجودة عالية",
                             "مودل حقيقي من الدولة المستهدفة",
                             "كتابة السكربت",
+                            "مراجعة السكريبت قبل التصوير (Approval)",
                             "بحث معمق عن زوايا البيع",
                             "مونتاج محفز للمبيعات",
+                            "مدة مركزة للنتائج (أقل من دقيقة)",
                             "مقاسات فيديو مخصصة"
                         ],
                         bonuses: [
@@ -368,15 +484,17 @@
                         ]
                     },
                     {
-                        name: "Plan 3",
+                        name: "Scale",
                         videos: "10 فيديوهات UGC",
                         price: "65,000",
                         features: [
                             "تصوير احترافي بجودة عالية",
                             "مودل حقيقي من الدولة المستهدفة",
                             "كتابة السكربت",
+                            "مراجعة السكريبت قبل التصوير (Approval)",
                             "بحث معمق عن زوايا البيع",
                             "مونتاج محفز للمبيعات",
+                            "مدة مركزة للنتائج (أقل من دقيقة)",
                             "مقاسات فيديو مخصصة"
                         ],
                         bonuses: [
@@ -390,33 +508,52 @@
             }
         };
 
+        // Scroll to form and fill data function with highlight effect
+        function selectPlan(offerName, planName) {
+            const formSection = document.getElementById('order-form-section');
+            const offerSelect = document.getElementById('selected-offer-input');
+            const planSelect = document.getElementById('selected-plan-input');
+
+            // Fill inputs (set select values)
+            offerSelect.value = offerName;
+            planSelect.value = planName;
+
+            // Smooth Scroll
+            formSection.scrollIntoView({ behavior: 'smooth' });
+            
+            // Add momentary glow effect to inputs to show they were updated
+            offerSelect.classList.add('ring-2', 'ring-blue-500', 'bg-blue-900/50');
+            planSelect.classList.add('ring-2', 'ring-blue-500', 'bg-blue-900/50');
+            
+            setTimeout(() => {
+                offerSelect.classList.remove('ring-2', 'ring-blue-500', 'bg-blue-900/50');
+                planSelect.classList.remove('ring-2', 'ring-blue-500', 'bg-blue-900/50');
+            }, 1500);
+        }
+
         function renderCards(category) {
             const grid = document.getElementById('pricing-grid');
             const data = plansData[category];
             
-            // --- Description Box Animation ---
             const container = document.getElementById('category-description-container');
             const titleEl = document.getElementById('cat-title');
             const descEl = document.getElementById('cat-desc');
 
-            // 1. Hide/Slide Down
+            // Slide Down / Fade Out
             container.classList.remove('slide-visible-up');
             container.classList.add('slide-hidden-down');
             
-            // 2. Update Content & Slide Up
             setTimeout(() => {
                 titleEl.innerText = data.title;
                 descEl.innerText = data.longDesc;
                 
-                // Show/Slide Up
+                // Slide Up / Fade In
                 container.classList.remove('slide-hidden-down');
                 container.classList.add('slide-visible-up');
             }, 300);
 
-            // --- Generate HTML ---
             let html = '';
             
-            // Generate HTML with HIDDEN state for each card initially
             data.plans.forEach((plan, index) => {
                 const bestSellerBadge = plan.isBestSeller ? `
                     <div class="absolute -top-4 right-1/2 translate-x-1/2 w-full text-center z-20">
@@ -428,10 +565,8 @@
                 ` : '';
 
                 const scaleClass = plan.isBestSeller ? 'scale-105 z-10' : '';
-                // Blue Shadow for Best Seller
                 const shadowClass = plan.isBestSeller ? 'shadow-2xl shadow-blue-500/10' : '';
 
-                // Features HTML - Updated Icons to Blue
                 let featuresHtml = plan.features.map(f => `
                     <li class="flex items-start gap-3">
                         <div class="mt-1 flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full bg-blue-500/10 text-blue-400">
@@ -441,7 +576,6 @@
                     </li>
                 `).join('');
 
-                // Bonuses HTML - Updated Glow to Blue
                 let bonusesHtml = '';
                 if(plan.bonuses && plan.bonuses.length > 0) {
                     bonusesHtml = `
@@ -461,7 +595,6 @@
                     `;
                 }
                 
-                // Card HTML with initial 'slide-hidden-down' class
                 html += `
                 <div class="card-item smooth-transition slide-hidden-down card-gradient-border group h-full flex flex-col ${scaleClass}">
                     <div class="relative h-full flex flex-col rounded-2xl bg-[#151e32]/95 backdrop-blur-sm p-6 lg:p-8 transition-transform duration-300 group-hover:scale-[0.99] border border-white/5 ${shadowClass}">
@@ -483,12 +616,19 @@
                         ${bonusesHtml}
                         
                         <div class="mt-8 pt-4 border-t border-white/5 text-center">
-                            <div class="flex items-baseline justify-center gap-1">
+                            <div class="flex items-baseline justify-center gap-1 mb-4">
                                 <span class="text-sm font-medium text-slate-400">دج</span>
                                 <span class="text-4xl font-bold tracking-tight text-white glow-text">
                                     ${plan.price}
                                 </span>
                             </div>
+                            
+                            <!-- CTA Button -->
+                            <button 
+                                onclick="selectPlan('${data.title}', '${plan.name}')"
+                                class="w-full py-3 rounded-xl font-bold text-sm text-white bg-blue-600/20 border border-blue-500/50 hover:bg-blue-600 hover:border-blue-600 transition-all duration-300 hover:shadow-[0_0_15px_rgba(59,130,246,0.4)]">
+                                احجز مقعدك الآن
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -497,34 +637,41 @@
 
             grid.innerHTML = html;
 
-            // --- Scroll Observer Animation ---
-            // Create an observer to trigger animation when grid comes into view
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        const cards = grid.querySelectorAll('.card-item');
-                        cards.forEach((card, index) => {
-                            setTimeout(() => {
-                                card.classList.remove('slide-hidden-down');
-                                card.classList.add('slide-visible-up');
-                            }, index * 200); // Stagger by 200ms
-                        });
-                        // Stop observing once animated
-                        observer.unobserve(entry.target);
+                        const target = entry.target;
+                        
+                        // Handle grid animations
+                        if (target.id === 'pricing-grid') {
+                            const cards = grid.querySelectorAll('.card-item');
+                            cards.forEach((card, index) => {
+                                setTimeout(() => {
+                                    card.classList.remove('slide-hidden-down');
+                                    card.classList.add('slide-visible-up');
+                                }, index * 200); 
+                            });
+                        }
+                        // Handle form animation
+                        else if (target.id === 'order-form-section') {
+                            target.classList.remove('slide-hidden-down');
+                            target.classList.add('slide-visible-up');
+                        }
+                        
+                        observer.unobserve(target);
                     }
                 });
-            }, { threshold: 0.1 }); // Trigger when 10% of the grid is visible
+            }, { threshold: 0.1 });
 
             observer.observe(grid);
+            observer.observe(document.getElementById('order-form-section'));
         }
 
         function switchCategory(category) {
-            // Update Tab Styles
             ['basic', 'organic', 'professional'].forEach(c => {
                 const btn = document.getElementById(`tab-${c}`);
                 if (c === category) {
                     btn.classList.remove('tab-inactive');
-                    // Blue shadow on active tab
                     btn.classList.add('tab-active');
                     btn.style.boxShadow = "0 0 15px rgba(59, 130, 246, 0.4)";
                 } else {
@@ -534,11 +681,9 @@
                 }
             });
 
-            // Call render which handles observer setup
             renderCards(category);
         }
 
-        // Initialize with Basic plan
         document.addEventListener('DOMContentLoaded', () => {
             switchCategory('basic');
         });
