@@ -82,13 +82,13 @@
         
         /* Smooth Slide Up Animation Classes */
         .smooth-transition {
-            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
             will-change: transform, opacity;
         }
         
         .slide-hidden-down {
             opacity: 0;
-            transform: translateY(100px); 
+            transform: translateY(50px); 
         }
         
         .slide-visible-up {
@@ -96,20 +96,7 @@
             transform: translateY(0);
         }
 
-        /* Active Form Glow Animation Class */
-        .form-active-glow {
-            box-shadow: 0 0 50px rgba(59, 130, 246, 0.25), inset 0 0 20px rgba(59, 130, 246, 0.1);
-            border-color: rgba(59, 130, 246, 0.6) !important;
-            transition: box-shadow 1s ease, border-color 1s ease;
-        }
-
         /* Gradient Background Animation */
-        @keyframes gradient-shift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
         .animated-gradient-bg {
             background: radial-gradient(circle at 50% 0%, #1e3a8a 0%, #0f172a 40%, #020617 100%);
         }
@@ -118,13 +105,11 @@
         .form-input {
             background: rgba(15, 23, 42, 0.6);
             border: 1px solid rgba(59, 130, 246, 0.3);
-            /* Updated to White for standard inputs */
             color: #ffffff; 
             font-weight: 600;
             transition: all 0.3s ease;
         }
         
-        /* Placeholder styling */
         .form-input::placeholder {
             color: #475569;
             font-weight: 400;
@@ -136,12 +121,12 @@
             box-shadow: 0 0 15px rgba(59, 130, 246, 0.3), inset 0 0 10px rgba(59, 130, 246, 0.1);
         }
         
-        /* Custom Select Style to handle arrow */
+        /* Custom Select Style */
         select.form-input {
             appearance: none;
             background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233b82f6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
             background-repeat: no-repeat;
-            background-position: left 1rem center; /* Adjusted for RTL */
+            background-position: left 1rem center; 
             background-size: 1em;
         }
         select.form-input option {
@@ -176,6 +161,12 @@
             text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
         }
 
+        /* Form Active Glow */
+        .form-active-glow {
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.2);
+            border-color: rgba(59, 130, 246, 0.5) !important;
+        }
+
         /* Custom scrollbar */
         .features-list::-webkit-scrollbar {
             width: 4px;
@@ -187,23 +178,78 @@
             background: #475569; 
             border-radius: 4px;
         }
+        
+        /* Image Mask */
+        .bg-fade-mask {
+            -webkit-mask-image: linear-gradient(to bottom, black 0%, black 65%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 0%, black 65%, transparent 100%);
+        }
+
+        /* --- NEW ANIMATIONS --- */
+        
+        /* Zoom In Keyframes */
+        @keyframes zoomInSmooth {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Zoom Out Keyframes */
+        @keyframes zoomOutSmooth {
+            0% {
+                opacity: 0;
+                transform: scale(1.2);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .animate-zoom-in {
+            animation: zoomInSmooth 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0; /* Initial state hidden */
+        }
+
+        .animate-zoom-out {
+            animation: zoomOutSmooth 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0; /* Initial state hidden */
+        }
+
+        /* Stagger Delays */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-500 { animation-delay: 0.5s; }
+
     </style>
 </head>
 <body class="min-h-screen text-slate-200 selection:bg-blue-500 selection:text-white overflow-x-hidden relative bg-[#020617]">
 
-    <!-- Clean Gradient Background -->
     <div class="fixed inset-0 z-0 animated-gradient-bg"></div>
 
-    <!-- Top Light Glow (Subtle Blue Ambient Light) -->
+    <!-- Background Image -->
+    <div class="absolute top-0 inset-x-0 h-[1100px] z-0 bg-fade-mask pointer-events-none overflow-hidden">
+        <!-- Replaced with a generic gradient fallback since external images sometimes break in preview, 
+             but keeping the structure if you want to swap the image back. 
+             Currently using a subtle dark gradient for stability. -->
+        <div class="w-full h-full bg-gradient-to-b from-blue-900/10 to-[#020617]"></div>
+    </div>
+
+    <!-- Top Glow -->
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[500px] bg-blue-500/10 blur-[100px] rounded-full pointer-events-none z-0 mix-blend-screen"></div>
 
     <div class="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         
-        <!-- Header Section -->
+        <!-- Header -->
         <div class="text-center mb-12">
-            
-            <!-- Logo AdWave -->
-            <div class="mb-10 flex justify-center">
+            <!-- Logo - Zoom In -->
+            <div class="mb-10 flex justify-center animate-zoom-in">
                 <div class="relative group cursor-default">
                     <div class="absolute -inset-4 bg-blue-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition duration-500"></div>
                     <div class="relative px-8 py-2 rounded-xl leading-none flex items-center justify-center">
@@ -214,23 +260,26 @@
                 </div>
             </div>
 
-            <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-blue-500/10 border border-blue-500/20 px-4 py-1.5 text-sm font-medium text-blue-400 backdrop-blur-md">
+            <!-- Tagline - Zoom In Delay -->
+            <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-blue-500/10 border border-blue-500/20 px-4 py-1.5 text-sm font-medium text-blue-400 backdrop-blur-md animate-zoom-in delay-100">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></svg>
                 باقات COD Funnel
             </div>
-            <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl glow-text drop-shadow-lg">
+            <!-- Main Title - Zoom In Delay -->
+            <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl glow-text drop-shadow-lg animate-zoom-in delay-200">
                 اختر الخطة المناسبة
                 <span class="bg-gradient-to-l from-blue-400 to-blue-600 bg-clip-text text-transparent">
                     لنمو مشروعك
                 </span>
             </h1>
-            <p class="mx-auto mt-4 max-w-2xl text-lg text-slate-400 font-light">
+            <!-- Subtitle - Zoom In Delay -->
+            <p class="mx-auto mt-4 max-w-2xl text-lg text-slate-400 font-light animate-zoom-in delay-300">
                 حلول متكاملة لصناعة المحتوى الإعلاني (UGC) تضمن لك أفضل النتائج والمبيعات.
             </p>
         </div>
 
-        <!-- Category Tabs -->
-        <div class="flex flex-wrap justify-center gap-4 mb-8">
+        <!-- Tabs - Zoom Out Animation -->
+        <div class="flex flex-wrap justify-center gap-4 mb-8 animate-zoom-out delay-500">
             <button onclick="switchCategory('basic')" id="tab-basic" class="tab-active px-8 py-3 rounded-full border text-base font-bold transition-all duration-300 backdrop-blur-sm">
                 Unboxing Plan
             </button>
@@ -248,23 +297,22 @@
                 <div class="relative rounded-2xl bg-[#0B1120]/60 px-6 py-8 text-center">
                     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-[1px] bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"></div>
                     <h3 id="cat-title" class="text-2xl font-bold text-blue-400 mb-3 glow-text tracking-wide">
-                        <!-- Title injected by JS -->
+                        <!-- JS Title -->
                     </h3>
                     <p id="cat-desc" class="text-slate-300 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto">
-                        <!-- Description injected by JS -->
+                        <!-- JS Desc -->
                     </p>
                 </div>
             </div>
         </div>
 
-        <!-- Pricing Cards Grid -->
+        <!-- Grid -->
         <div id="pricing-grid" class="grid gap-8 md:grid-cols-3 items-start min-h-[600px]">
-            <!-- Cards injected by JS -->
+            <!-- Cards will be injected here -->
         </div>
 
-        <!-- Order Form Section -->
+        <!-- Order Form -->
         <div id="order-form-section" class="mt-24 max-w-3xl mx-auto px-4 relative smooth-transition slide-hidden-down">
-            <!-- Decorative Glow behind form -->
             <div class="absolute inset-0 bg-blue-600/5 blur-3xl rounded-full pointer-events-none"></div>
             
             <div id="form-inner-container" class="relative overflow-hidden rounded-2xl bg-[#0f172a]/80 p-[1px] shadow-2xl border border-blue-500/20 backdrop-blur-xl transition-all duration-700">
@@ -275,9 +323,7 @@
                     </div>
 
                     <form class="space-y-6" onsubmit="event.preventDefault(); alert('تم إرسال طلبك بنجاح! سنتواصل معك قريباً.');">
-                        <!-- Vertical Stack Layout -->
                         <div class="flex flex-col gap-6">
-                            
                             <div class="space-y-2">
                                 <label class="text-sm font-medium text-blue-300">الاسم الكامل</label>
                                 <input type="text" placeholder="اكتب اسمك هنا" class="w-full px-4 py-3 rounded-lg form-input" required>
@@ -309,7 +355,6 @@
                                     </select>
                                 </div>
                             </div>
-
                         </div>
 
                         <button type="submit" class="w-full py-4 mt-6 rounded-xl font-bold text-lg text-white bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 transition-all duration-300 btn-glow-hover transform hover:-translate-y-1 border border-blue-400/30">
@@ -326,7 +371,6 @@
     </div>
 
     <script>
-        // Data derived from PDF with estimated DZD prices
         const plansData = {
             basic: {
                 title: "Unboxing Plan",
@@ -406,8 +450,7 @@
                         ],
                         bonuses: [
                             "مقاسات فيديو مخصصة",
-                            "متابعة مستمرة (Follow-up)",
-                            "قراءة مؤشرات الأداء (KPIs)"
+                            "متابعة مستمرة (Follow-up)"
                         ]
                     },
                     {
@@ -424,8 +467,7 @@
                         ],
                         bonuses: [
                             "مقاسات فيديو مخصصة",
-                            "متابعة مستمرة (Follow-up)",
-                            "قراءة مؤشرات الأداء (KPIs)"
+                            "متابعة مستمرة (Follow-up)"
                         ]
                     },
                     {
@@ -442,8 +484,7 @@
                         ],
                         bonuses: [
                             "مقاسات فيديو مخصصة",
-                            "متابعة مستمرة (Follow-up)",
-                            "قراءة مؤشرات الأداء (KPIs)"
+                            "متابعة مستمرة (Follow-up)"
                         ]
                     }
                 ]
@@ -455,7 +496,7 @@
                     {
                         name: "Tester",
                         videos: "2 فيديوهات UGC",
-                        price: "17,500",
+                        price: "16,900",
                         features: [
                             "تصوير احترافي بجودة عالية",
                             "مودل حقيقي من الدولة المستهدفة (Real Model From The Country)",
@@ -468,13 +509,13 @@
                         bonuses: [
                             "مقاسات فيديو مخصصة",
                             "متابعة مستمرة (Follow-up)",
-                            "قراءة KPIs"
+                            "قراءة مؤشرات الأداء (KPIs)"
                         ]
                     },
                     {
                         name: "Growth",
                         videos: "5 فيديوهات UGC",
-                        price: "42,500",
+                        price: "40,900",
                         isBestSeller: true,
                         features: [
                             "تصوير احترافي بجودة عالية",
@@ -488,13 +529,13 @@
                         bonuses: [
                             "مقاسات فيديو مخصصة",
                             "متابعة مستمرة (Follow-up)",
-                            "قراءة KPIs"
+                            "قراءة مؤشرات الأداء (KPIs)"
                         ]
                     },
                     {
                         name: "Scale",
                         videos: "10 فيديوهات UGC",
-                        price: "65,000",
+                        price: "79,900",
                         features: [
                             "تصوير احترافي بجودة عالية",
                             "مودل حقيقي من الدولة المستهدفة (Real Model From The Country)",
@@ -507,33 +548,27 @@
                         bonuses: [
                             "مقاسات فيديو مخصصة",
                             "متابعة مستمرة (Follow-up)",
-                            "قراءة KPIs"
+                            "قراءة مؤشرات الأداء (KPIs)"
                         ]
                     }
                 ]
             }
         };
 
-        // Scroll to form and fill data function with highlight effect
         function selectPlan(offerName, planName) {
             const formSection = document.getElementById('order-form-section');
             const offerSelect = document.getElementById('selected-offer-input');
             const planSelect = document.getElementById('selected-plan-input');
 
-            // Fill inputs (set select values)
             offerSelect.value = offerName;
             planSelect.value = planName;
 
-            // Smooth Scroll
             formSection.scrollIntoView({ behavior: 'smooth' });
             
-            // Add momentary glow effect to inputs to show they were updated
-            offerSelect.classList.add('ring-2', 'ring-blue-500', 'bg-blue-900/50');
-            planSelect.classList.add('ring-2', 'ring-blue-500', 'bg-blue-900/50');
-            
+            // Trigger glow effect on form
+            document.getElementById('form-inner-container').classList.add('form-active-glow');
             setTimeout(() => {
-                offerSelect.classList.remove('ring-2', 'ring-blue-500', 'bg-blue-900/50');
-                planSelect.classList.remove('ring-2', 'ring-blue-500', 'bg-blue-900/50');
+                document.getElementById('form-inner-container').classList.remove('form-active-glow');
             }, 1500);
         }
 
@@ -582,7 +617,6 @@
                     </li>
                 `).join('');
 
-                // Updated Bonuses Header (No Emoji)
                 let bonusesHtml = '';
                 if(plan.bonuses && plan.bonuses.length > 0) {
                     bonusesHtml = `
@@ -630,7 +664,6 @@
                                 </span>
                             </div>
                             
-                            <!-- CTA Button -->
                             <button 
                                 onclick="selectPlan('${data.title}', '${plan.name}')"
                                 class="w-full py-3 rounded-xl font-bold text-sm text-white bg-blue-600/20 border border-blue-500/50 hover:bg-blue-600 hover:border-blue-600 transition-all duration-300 hover:shadow-[0_0_15px_rgba(59,130,246,0.4)]">
@@ -644,36 +677,14 @@
 
             grid.innerHTML = html;
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const target = entry.target;
-                        
-                        // Handle grid animations (Individual Cards)
-                        if (target.classList.contains('card-item')) {
-                            target.classList.remove('slide-hidden-down');
-                            target.classList.add('slide-visible-up');
-                            observer.unobserve(target); // Unobserve to animate only once
-                        }
-                        
-                        // Handle form animation
-                        if (target.id === 'order-form-section') {
-                            target.classList.remove('slide-hidden-down');
-                            target.classList.add('slide-visible-up');
-                            // Add glow effect to inner container
-                            document.getElementById('form-inner-container').classList.add('form-active-glow');
-                            observer.unobserve(target);
-                        }
-                    }
-                });
-            }, { threshold: 0.15 }); // 15% visibility trigger
-
-            // Observe individual cards
+            // Trigger animations
             const cards = grid.querySelectorAll('.card-item');
-            cards.forEach(card => observer.observe(card));
-
-            // Observe form
-            observer.observe(document.getElementById('order-form-section'));
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.remove('slide-hidden-down');
+                    card.classList.add('slide-visible-up');
+                }, index * 200); 
+            });
         }
 
         function switchCategory(category) {
@@ -694,6 +705,21 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            // Setup Form Observer for Scroll Animation
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.remove('slide-hidden-down');
+                        entry.target.classList.add('slide-visible-up');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            const formSection = document.getElementById('order-form-section');
+            if(formSection) observer.observe(formSection);
+
+            // Initial Render
             switchCategory('basic');
         });
     </script>
