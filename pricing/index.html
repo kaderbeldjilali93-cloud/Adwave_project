@@ -15,8 +15,9 @@
         body {
             font-family: 'Cairo', sans-serif;
         }
+        /* Updated to Blue Glow */
         .glow-text {
-            text-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+            text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
         }
         .card-gradient-border {
             position: relative;
@@ -26,13 +27,15 @@
             transition: all 0.3s ease;
         }
         .card-gradient-border:hover {
-            background-image: linear-gradient(163deg, #f59e0b 0%, #ea580c 100%);
-            box-shadow: 0px 0px 30px 1px rgba(245, 158, 11, 0.2);
+            /* Blue Gradient */
+            background-image: linear-gradient(163deg, #3b82f6 0%, #2563eb 100%);
+            box-shadow: 0px 0px 30px 1px rgba(59, 130, 246, 0.3);
         }
         .tab-active {
-            background-color: #f59e0b;
-            color: #0B1120;
-            border-color: #f59e0b;
+            background-color: #3b82f6; /* Blue-500 */
+            color: #ffffff;
+            border-color: #3b82f6;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
         }
         .tab-inactive {
             background-color: transparent;
@@ -40,12 +43,12 @@
             border-color: #334155;
         }
         .tab-inactive:hover {
-            border-color: #f59e0b;
-            color: #f59e0b;
+            border-color: #3b82f6;
+            color: #3b82f6;
         }
         .bonus-glow-border {
-            border: 1px solid rgba(245, 158, 11, 0.5);
-            box-shadow: 0 0 15px rgba(245, 158, 11, 0.2), inset 0 0 10px rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.5);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.2), inset 0 0 10px rgba(59, 130, 246, 0.1);
         }
         /* Glassy 3D Title Style */
         .plan-glass-3d {
@@ -85,7 +88,7 @@
         
         .slide-hidden-down {
             opacity: 0;
-            transform: translateY(60px); /* Increased distance for better effect */
+            transform: translateY(60px); 
         }
         
         .slide-visible-up {
@@ -112,7 +115,7 @@
         }
     </style>
 </head>
-<body class="min-h-screen text-slate-200 selection:bg-[#f59e0b] selection:text-white overflow-x-hidden relative bg-[#0B1120]">
+<body class="min-h-screen text-slate-200 selection:bg-blue-500 selection:text-white overflow-x-hidden relative bg-[#0B1120]">
 
     <!-- Global Subtle Background (Base) -->
     <div class="fixed inset-0 z-0 bg-[#0B1120]"></div>
@@ -125,25 +128,39 @@
             alt="UGC Studio Background" 
             class="w-full h-full object-cover opacity-20 mix-blend-luminosity"
         />
-        <!-- Gradient Overlay to ensure text readability -->
+        <!-- Gradient Overlay - Tinted slightly blue/dark -->
         <div class="absolute inset-0 bg-gradient-to-b from-[#0B1120]/80 via-[#0B1120]/60 to-[#0B1120]"></div>
     </div>
 
-    <!-- Top Glow Effect -->
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-[#f59e0b]/10 blur-[120px] pointer-events-none z-0"></div>
+    <!-- Top Glow Effect (Blue) -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-blue-600/10 blur-[120px] pointer-events-none z-0"></div>
 
     <div class="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         
         <!-- Header Section -->
         <div class="text-center mb-12">
-            <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-[#f59e0b]/10 border border-[#f59e0b]/20 px-4 py-1.5 text-sm font-medium text-[#f59e0b] backdrop-blur-md">
+            
+            <!-- Logo AdWave (Text Only, No Icon, Blue Glow) -->
+            <div class="mb-10 flex justify-center">
+                <div class="relative group cursor-default">
+                    <!-- Blue glow behind logo -->
+                    <div class="absolute -inset-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full blur-xl opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+                    <div class="relative px-8 py-2 rounded-xl leading-none flex items-center justify-center">
+                        <span class="text-5xl font-black tracking-tighter text-white font-sans drop-shadow-lg">
+                            Ad<span class="text-blue-500">Wave</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-blue-500/10 border border-blue-500/20 px-4 py-1.5 text-sm font-medium text-blue-400 backdrop-blur-md">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></svg>
                 باقات COD Funnel
             </div>
             <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl glow-text drop-shadow-2xl">
                 اختر الخطة المناسبة
-                <span class="bg-gradient-to-l from-[#f59e0b] to-[#ea580c] bg-clip-text text-transparent">
-                    لنمو متجرك
+                <span class="bg-gradient-to-l from-blue-400 to-blue-600 bg-clip-text text-transparent">
+                    لنمو مشروعك
                 </span>
             </h1>
             <p class="mx-auto mt-4 max-w-2xl text-lg text-slate-300 font-light drop-shadow-md">
@@ -151,9 +168,9 @@
             </p>
         </div>
 
-        <!-- Category Tabs -->
+        <!-- Category Tabs (Blue) -->
         <div class="flex flex-wrap justify-center gap-4 mb-8">
-            <button onclick="switchCategory('basic')" id="tab-basic" class="tab-active px-8 py-3 rounded-full border text-base font-bold transition-all duration-300 shadow-[0_0_15px_rgba(245,158,11,0.2)] backdrop-blur-sm">
+            <button onclick="switchCategory('basic')" id="tab-basic" class="tab-active px-8 py-3 rounded-full border text-base font-bold transition-all duration-300 backdrop-blur-sm">
                 Basic Plan
             </button>
             <button onclick="switchCategory('organic')" id="tab-organic" class="tab-inactive px-8 py-3 rounded-full border text-base font-bold transition-all duration-300 backdrop-blur-sm">
@@ -166,14 +183,15 @@
 
         <!-- Description Box Container with Smooth Slide Animation -->
         <div id="category-description-container" class="max-w-4xl mx-auto mb-16 px-4 smooth-transition slide-visible-up">
-            <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#1e293b]/80 via-[#0f172a]/80 to-[#0B1120]/90 p-[1px] shadow-[0_0_30px_-5px_rgba(245,158,11,0.1)] border border-[#f59e0b]/10 backdrop-blur-xl">
+            <!-- Updated borders to Blue -->
+            <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#1e293b]/80 via-[#0f172a]/80 to-[#0B1120]/90 p-[1px] shadow-[0_0_30px_-5px_rgba(59,130,246,0.15)] border border-blue-500/10 backdrop-blur-xl">
                 <!-- Inner Content -->
                 <div class="relative rounded-2xl bg-[#0B1120]/40 px-6 py-8 text-center">
                     
-                    <!-- Decorative Icon/Element -->
-                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-[1px] bg-gradient-to-r from-transparent via-[#f59e0b]/50 to-transparent"></div>
+                    <!-- Decorative Icon/Element Blue -->
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-[1px] bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"></div>
                     
-                    <h3 id="cat-title" class="text-2xl font-bold text-[#f59e0b] mb-3 glow-text tracking-wide">
+                    <h3 id="cat-title" class="text-2xl font-bold text-blue-400 mb-3 glow-text tracking-wide">
                         <!-- JS injected title -->
                     </h3>
                     <p id="cat-desc" class="text-slate-200 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto drop-shadow-sm">
@@ -402,7 +420,7 @@
             data.plans.forEach((plan, index) => {
                 const bestSellerBadge = plan.isBestSeller ? `
                     <div class="absolute -top-4 right-1/2 translate-x-1/2 w-full text-center z-20">
-                        <span class="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-[#f59e0b] to-[#ea580c] px-4 py-1.5 text-sm font-bold text-white shadow-[0_0_20px_rgba(245,158,11,0.4)]">
+                        <span class="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 px-4 py-1.5 text-sm font-bold text-white shadow-[0_0_20px_rgba(59,130,246,0.4)]">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
                             الأكثر طلباً
                         </span>
@@ -410,25 +428,26 @@
                 ` : '';
 
                 const scaleClass = plan.isBestSeller ? 'scale-105 z-10' : '';
-                const shadowClass = plan.isBestSeller ? 'shadow-2xl shadow-[#f59e0b]/10' : '';
+                // Blue Shadow for Best Seller
+                const shadowClass = plan.isBestSeller ? 'shadow-2xl shadow-blue-500/10' : '';
 
-                // Features HTML
+                // Features HTML - Updated Icons to Blue
                 let featuresHtml = plan.features.map(f => `
                     <li class="flex items-start gap-3">
-                        <div class="mt-1 flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full bg-[#f59e0b]/10 text-[#f59e0b]">
+                        <div class="mt-1 flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full bg-blue-500/10 text-blue-400">
                             <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                         </div>
                         <span class="text-sm text-slate-300">${f}</span>
                     </li>
                 `).join('');
 
-                // Bonuses HTML
+                // Bonuses HTML - Updated Glow to Blue
                 let bonusesHtml = '';
                 if(plan.bonuses && plan.bonuses.length > 0) {
                     bonusesHtml = `
                         <div class="mt-6 pt-4 border-t border-white/10">
-                            <div class="bonus-glow-border rounded-lg p-2 mb-3 text-center bg-[#f59e0b]/5 backdrop-blur-sm">
-                                <p class="text-sm font-bold text-[#f59e0b] drop-shadow-sm">✨ مجاناً مع هذه الباقة ✨</p>
+                            <div class="bonus-glow-border rounded-lg p-2 mb-3 text-center bg-blue-500/5 backdrop-blur-sm">
+                                <p class="text-sm font-bold text-blue-400 drop-shadow-sm">✨ مجاناً مع هذه الباقة ✨</p>
                             </div>
                             <ul class="space-y-2">
                                 ${plan.bonuses.map(b => `
@@ -505,10 +524,13 @@
                 const btn = document.getElementById(`tab-${c}`);
                 if (c === category) {
                     btn.classList.remove('tab-inactive');
-                    btn.classList.add('tab-active', 'shadow-[0_0_15px_rgba(245,158,11,0.2)]');
+                    // Blue shadow on active tab
+                    btn.classList.add('tab-active');
+                    btn.style.boxShadow = "0 0 15px rgba(59, 130, 246, 0.4)";
                 } else {
                     btn.classList.add('tab-inactive');
-                    btn.classList.remove('tab-active', 'shadow-[0_0_15px_rgba(245,158,11,0.2)]');
+                    btn.classList.remove('tab-active');
+                    btn.style.boxShadow = "none";
                 }
             });
 
